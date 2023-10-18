@@ -7,23 +7,24 @@ using System.Threading.Tasks;
 
 namespace eTicketBookings.Models
 {
-    public class Actor:IEntityBase
+    public class Producer:IEntityBase
     {
         [Key]
         public int id { get; set; }
-        [Display(Name ="Profile Picture")]
-        [Required(ErrorMessage ="Profile Picture is required")]
+        [Display(Name = "Profile Picture")]
+        [Required(ErrorMessage ="Profile Picture URL is required")]
+
         public string profilePictureUrl { get; set; }
-        [Display(Name ="Full Name")]
-        [Required(ErrorMessage ="Full Name is required")]
-        [StringLength(50,MinimumLength =3,ErrorMessage ="Length must be in 3 to 50")]
+        [Display(Name = "Full Name")]
+        [Required(ErrorMessage ="FullName is required")]
+        [StringLength(50,MinimumLength =3,ErrorMessage ="Length should be in between 3 to 50")]
 
         public string fullName { get; set; }
         [Display(Name = "BIO")]
-        [Required(ErrorMessage ="Biography is required")]
+        [Required(ErrorMessage ="Bio is required")]
 
         public string Bio { get; set; }
         //relationship
-        public List<Actor_Movie> actor_movie { get; set; }
+        public List<Movie> movies { get; set; }
     }
 }

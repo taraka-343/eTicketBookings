@@ -1,6 +1,9 @@
+using eTicketBookings.Data;
+using eTicketBookings.Data.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,6 +26,12 @@ namespace eTicketBookings
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //appdbcontext
+            services.AddDbContext<AppDbContext>(options=>options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
+            services.AddScoped<IActorService, actorService>();
+            services.AddScoped<IProducerService, producerService>();
+            services.AddScoped<ICinemaService, cinemaService>();
+            services.AddScoped<IMovieService,movieService>();
             services.AddControllersWithViews();
         }
 
@@ -52,6 +61,7 @@ namespace eTicketBookings
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+            AppDbInitializer.seed(app);
         }
     }
 }
