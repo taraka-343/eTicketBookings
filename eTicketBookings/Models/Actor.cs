@@ -25,5 +25,6 @@ namespace eTicketBookings.Models
         public string Bio { get; set; }
         //relationship
         public List<Actor_Movie> actor_movie { get; set; }
+        public string tarak { get; set; }
     }
 }
